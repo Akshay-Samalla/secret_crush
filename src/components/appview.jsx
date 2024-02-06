@@ -29,6 +29,7 @@ const Appview=()=>{
             setRiddle('')
             setPosts(prevposts+1)
             localStorage.setItem('posts',prevposts+1)
+            alert('OK')
 
         }
         catch(e){
