@@ -6,11 +6,13 @@ import { collection , addDoc} from "firebase/firestore";
 const Appview=()=>{
     const [yourname, setYourname] = useState('')
     const [yourcrush, setYourcrush] = useState('')
+    const [riddle, setRiddle] = useState('')
     const [posts, setPosts] = useState(0)
 
     const contents={
         yourname:yourname,
-        yourcrush:yourcrush
+        yourcrush:yourcrush,
+        riddle:riddle
     }
     const handleuploadtext=async()=>{
         const prevposts=parseInt(localStorage.getItem('posts'))||0;
@@ -24,6 +26,7 @@ const Appview=()=>{
             await addDoc(content,{contents,timestamp:new Date()})
             setYourname('')
             setYourcrush('')
+            setRiddle('')
             setPosts(prevposts+1)
             localStorage.setItem('posts',prevposts+1)
 
@@ -60,7 +63,7 @@ const Appview=()=>{
             <p className="texts">Your crush:</p>
             <input type="text" value={yourcrush} onChange={(e)=>setYourcrush(e.currentTarget.value)} className="inputs"/>
             <p className="texts">Riddle/Poem:</p>
-            <textarea className="textinput" rows="4" cols="25" placeholder="Enter your text here"></textarea>
+            <textarea className="textinput" rows="4" cols="25" placeholder="Enter your text here" value={riddle} onChange={(e)=>setRiddle(e.currentTarget.value)}></textarea>
 
             <br />
             <input className="btn" type="button" value="submit" onClick={handleuploadtext}/>
